@@ -6,41 +6,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Exercise 7 (7.1 to 7.3)</title>
   </head>
+  <style>
+    #totalNights {
+      font-size: 20px;
+      color: cadetblue;
+      background-color: black;
+      border: 2px solid black;
+      margin-top: 2px;
+      width: 500px;
+    }
+    #yesBreakfast {
+      font-size: 20px;
+      color: goldenrod;
+      background-color: black;
+      border: 2px solid black;
+      margin-top: 2px;
+      width: 500px;
+    }
+    #specDiscount {
+      font-size: 20px;
+      color: crimson;
+      background-color: black;
+      border: 2px solid orangered;
+      margin-top: 2px;
+      width: 500px;
+      height: auto;
+    }
+  </style>
   <body>
     <h1>Welcome to our fantastic Beachwalk Hotel</h1>
-    <h2>7.1</h2>
+    <h2>7.1 Cost per night!</h2>
     <p>
-      Our price for night is 90€ Please select how many nights you would like to
-      stay and print the total cost.
+      Our price for night is 90 €, please select how many nights that you would
+      like to stay and the cost is shown below.
     </p>
-
     <input
       id="nights"
       type="number"
       value="0"
       placeholder="number of night/s"
     />
-    <button id="button1">click</button>
+    <button id="button1">enter!</button>
     <div id="totalNights">Total cost will show here.</div>
-
-    <h2>7.2</h2>
+    <br />
+    <h2>7.2 Breakfast 🧇🍳</h2>
     <p>
-      Breakfast is an extra 10€ Continue from the last exercise and ask the user
-      if he would like to include breakfast. Print the total cost.
+      Breakfast is an extra 10€ please select if you would like to include
+      breakfast. The cost of breakfast is shown below.
     </p>
-    <p>Would you like breakfast?</p>
-    <p>The price for breakfast per night is €10.</p>
-    <!-- <input id="toEat" name="breakfast" type="radio" />Yes
+    <p>Include breakfast?</p>
+    <input id="toEat" name="breakfast" type="radio" />Yes
     <input id="noBread" name="breakfast" type="radio" />No
-    <div id="addBreakfast">The price of breakfast per night is €10.</div> -->
+    <div>The price of breakfast per night is €10.</div>
     <button id="addBreakfastButton">Add</button>
     <div id="yesBreakfast">The price of breakfast will show here.</div>
-    <h2>7.3</h2>
-    <h2>Special Discout!</h2>
+
+    <br />
+    <h2>7.3 Special Discout!</h2>
     <p>For 5 nights or more, there's a 10%!</p>
     <p>For 10 nights or more, there's a 15%!</p>
     <p>For 15 nights or more, there's a 20%!</p>
-    <div id="specDiscount">Discount will be showed here!</div>
+    <div id="specDiscount">Discount will be showed here if selected!</div>
 
     <script>
       const nights = document.querySelector("#nights");
@@ -56,25 +82,36 @@
 
       button1.addEventListener("click", function costOfStay() {
         let cost = nights.value * 90;
-        console.log(cost);
-
         totalNights.innerHTML = `The total cost is ${cost} `;
         let discount = 0;
-
-        if (nights.value <= 5) {
-          discount = cost - cost * 0.1;
-        } else if (nights.value <= 10) {
-          discount = cost - cost * 0.15;
-        } else if (nights.value === 15 || nights.value > 15) {
-          discount = cost - cost * 0.2;
+        if (nights.value < 5) {
+          specDiscount.innerHTML = `No discount applied!`;
         }
-        specDiscount.innerHTML = `You will only pay ${discount}!`;
-        console.log(discount);
+        if (nights.value >= 5) {
+          discount = cost - cost * 0.1;
+          specDiscount.innerHTML = `You will pay € ${discount} with 10% OFF!`;
+        }
+        if (nights.value >= 10) {
+          discount = cost - cost * 0.15;
+          specDiscount.innerHTML = `You will pay € ${discount} with 15% OFF!!`;
+        }
+        if (nights.value >= 15) {
+          discount = cost - cost * 0.2;
+          specDiscount.innerHTML = `You will pay € ${discount} with 20% OFF!!`;
+        }
       });
 
-      addBreakfastButton.addEventListener("click", function () {
+      addBreakfastButton.addEventListener("click", function breakfast() {
         let BreakfastTime = nights.value * 10;
-        yesBreakfast.innerHTML = `The cost per breakfast per night is ${BreakfastTime}.`;
+        if (toEat.checked === true) {
+          alert(`Breakfast added!`);
+          yesBreakfast.innerHTML = `The cost per breakfast per night is € ${BreakfastTime}. 😄`;
+        }
+        if (noBread.checked === true) {
+          alert(`No breakfast? Our buffet breakfast is one of the best!`);
+          yesBreakfast.innerHTML = `No breakfast added 😭`;
+        }
+        return;
       });
     </script>
   </body>
