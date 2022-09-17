@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise 7 (7.1 to 7.3)</title>
+  </head>
+  <body>
+    <h1>Welcome to our fantastic Beachwalk Hotel</h1>
+    <h2>7.1</h2>
+    <p>
+      Our price for night is 90€ Please select how many nights you would like to
+      stay and print the total cost.
+    </p>
+
+    <input
+      id="nights"
+      type="number"
+      value="0"
+      placeholder="number of night/s"
+    />
+    <button id="button1">click</button>
+    <div id="totalNights">Total cost will show here.</div>
+
+    <h2>7.2</h2>
+    <p>
+      Breakfast is an extra 10€ Continue from the last exercise and ask the user
+      if he would like to include breakfast. Print the total cost.
+    </p>
+    <p>Would you like breakfast?</p>
+    <p>The price for breakfast per night is €10.</p>
+    <!-- <input id="toEat" name="breakfast" type="radio" />Yes
+    <input id="noBread" name="breakfast" type="radio" />No
+    <div id="addBreakfast">The price of breakfast per night is €10.</div> -->
+    <button id="addBreakfastButton">Add</button>
+    <div id="yesBreakfast">The price of breakfast will show here.</div>
+    <h2>7.3</h2>
+    <h2>Special Discout!</h2>
+    <p>For 5 nights or more, there's a 10%!</p>
+    <p>For 10 nights or more, there's a 15%!</p>
+    <p>For 15 nights or more, there's a 20%!</p>
+    <div id="specDiscount">Discount will be showed here!</div>
+
+    <script>
+      const nights = document.querySelector("#nights");
+      const totalNights = document.querySelector("#totalNights");
+      const button1 = document.querySelector("#button1");
+
+      const toEat = document.querySelector("#toEat");
+      const noBread = document.querySelector("#noBread");
+      const addBreakfastButton = document.querySelector("#addBreakfastButton");
+      const yesBreakfast = document.querySelector("#yesBreakfast");
+
+      const specDiscount = document.querySelector("#specDiscount");
+
+      button1.addEventListener("click", function costOfStay() {
+        let cost = nights.value * 90;
+        console.log(cost);
+
+        totalNights.innerHTML = `The total cost is ${cost} `;
+        let discount = 0;
+
+        if (nights.value <= 5) {
+          discount = cost - cost * 0.1;
+        } else if (nights.value <= 10) {
+          discount = cost - cost * 0.15;
+        } else if (nights.value === 15 || nights.value > 15) {
+          discount = cost - cost * 0.2;
+        }
+        specDiscount.innerHTML = `You will only pay ${discount}!`;
+        console.log(discount);
+      });
+
+      addBreakfastButton.addEventListener("click", function () {
+        let BreakfastTime = nights.value * 10;
+        yesBreakfast.innerHTML = `The cost per breakfast per night is ${BreakfastTime}.`;
+      });
+    </script>
+  </body>
+</html>
