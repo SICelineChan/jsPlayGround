@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise 7 (7.1 to 7.3)</title>
+  </head>
+  <style>
+    #totalNights {
+      font-size: 20px;
+      color: gold;
+      background-color: black;
+      border: 2px solid black;
+      margin-top: 2px;
+      width: 500px;
+    }
+    #yesBreakfast {
+      font-size: 20px;
+      color: pink;
+      background-color: black;
+      border: 2px solid black;
+      margin-top: 2px;
+      width: 500px;
+    }
+    #specDiscount {
+      font-size: 20px;
+      color: goldenrod;
+      background-color: black;
+      border: 2px dotted silver;
+      margin-top: 2px;
+      width: 500px;
+      height: auto;
+    }
+  </style>
+  <body>
+    <h1>Welcome to our fantastic Beachwalk Hotel</h1>
+    <h2>7.1 & 7.4 Cost per night & Luxury room</h2>
+    <p>
+      Our price for night is 90 €, please select how many nights that you would
+      like to stay and the cost is shown below.
+    </p>
+    <input
+      id="nights"
+      type="number"
+      value="0"
+      placeholder="number of night/s"
+    />
+    <br />
+    <input type="radio" id="normalRoom" name="room" value="normalRoom" />
+    <label for="room1">Normal room €90 🧳</label><br />
+    <input type="radio" id="deluxeRoom" name="room" value="deluxeRoom" />
+    <label for="room2">Deluxe room €120 🎩</label><br />
+    <input type="radio" id="suites" name="room" value="suites" />
+    <label for="room3">Deluxe Suites €150 👑</label><br />
+    <button id="button1">enter!</button>
+    <div id="totalNights">
+      The price per night with your choice of room will show here.
+    </div>
+    <br />
+    <h2>7.2 Breakfast 🍳</h2>
+    <p>
+      Breakfast is an extra 10€ please select if you would like to include
+      breakfast. The cost of breakfast is shown below.
+    </p>
+    <p>Include breakfast?</p>
+    <input id="toEat" name="breakfast" type="radio" />Yes
+    <input id="noBread" name="breakfast" type="radio" />No
+    <div>The price of breakfast per night is €10.</div>
+    <button id="addBreakfastButton">Add</button>
+    <div id="yesBreakfast">The price of breakfast will show here.</div>
+
+    <br />
+    <h2>7.3 Special Discout!</h2>
+    <p>For 5 nights or more, there's a 10%!</p>
+    <p>For 10 nights or more, there's a 15%!</p>
+    <p>For 15 nights or more, there's a 20%!</p>
+    <div id="specDiscount">Discount will be showed here if selected!</div>
+
+    <script>
+      const nights = document.querySelector("#nights");
+      const totalNights = document.querySelector("#totalNights");
+      const button1 = document.querySelector("#button1");
+      const normalRoom = document.querySelector("#normalRoom");
+      const deluxeRoom = document.querySelector("#deluxeRoom");
+      const suites = document.querySelector("#suites");
+
+      const toEat = document.querySelector("#toEat");
+      const noBread = document.querySelector("#noBread");
+      const addBreakfastButton = document.querySelector("#addBreakfastButton");
+      const yesBreakfast = document.querySelector("#yesBreakfast");
+
+      const specDiscount = document.querySelector("#specDiscount");
+
+      button1.addEventListener("click", function costOfStay() {
+        let cost = nights.value * 90;
+        let deluxe = nights.value * 120;
+        let suiteRoom = nights.value * 150;
+        let discount = 0;
+
+        if (normalRoom.checked === true) {
+          totalNights.innerHTML = `The per night is € ${cost} `;
+          console.log(basicDiscount(cost));
+        } else if (deluxeRoom.checked === true) {
+          totalNights.innerHTML = `The per night is € ${deluxe} `;
+          console.log(deluxeDiscount(deluxe));
+        } else if (suites.checked === true) {
+          totalNights.innerHTML = `The per night is €  ${suiteRoom} `;
+          console.log(suitesDiscount(suiteRoom));
+        }
+      });
+
+      addBreakfastButton.addEventListener("click", function breakfast() {
+        let BreakfastTime = nights.value * 10;
+        if (toEat.checked === true) {
+          alert(`Breakfast added!`);
+          yesBreakfast.innerHTML = `The cost per breakfast per night is € ${BreakfastTime}. 😄`;
+        }
+        if (noBread.checked === true) {
+          alert(`No breakfast? Our buffet breakfast is one of the best!`);
+          yesBreakfast.innerHTML = `No breakfast added 😭`;
+        }
+        return;
+      });
+
+      function basicDiscount(cost) {
+        if (nights.value < 5) {
+          specDiscount.innerHTML = `No discount applied!`;
+        }
+        if (nights.value >= 5) {
+          discount = cost - cost * 0.1;
+          specDiscount.innerHTML = `You will pay € ${discount} with 10% OFF!`;
+        }
+        if (nights.value >= 10) {
+          discount = cost - cost * 0.15;
+          specDiscount.innerHTML = `You will pay € ${discount} with 15% OFF!!`;
+        }
+        if (nights.value >= 15) {
+          discount = cost - cost * 0.2;
+          specDiscount.innerHTML = `You will pay € ${discount} with 20% OFF!!`;
+        }
+        return discount;
+      }
+      function deluxeDiscount(deluxe) {
+        if (nights.value < 5) {
+          specDiscount.innerHTML = `No discount applied!`;
+        }
+        if (nights.value >= 5) {
+          discount = deluxe - deluxe * 0.1;
+          specDiscount.innerHTML = `You will pay € ${discount} with 10% OFF!`;
+        }
+        if (nights.value >= 10) {
+          discount = deluxe - deluxe * 0.15;
+          specDiscount.innerHTML = `You will pay € ${discount} with 15% OFF!!`;
+        }
+        if (nights.value >= 15) {
+          discount = deluxe - deluxe * 0.2;
+          specDiscount.innerHTML = `You will pay € ${discount} with 20% OFF!!`;
+        }
+        return discount;
+      }
+      function suitesDiscount(suiteRoom) {
+        if (nights.value < 5) {
+          specDiscount.innerHTML = `No discount applied!`;
+        }
+        if (nights.value >= 5) {
+          discount = suiteRoom - suiteRoom * 0.1;
+          specDiscount.innerHTML = `You will pay € ${discount} with 10% OFF!`;
+        }
+        if (nights.value >= 10) {
+          discount = suiteRoom - suiteRoom * 0.15;
+          specDiscount.innerHTML = `You will pay € ${discount} with 15% OFF!!`;
+        }
+        if (nights.value >= 15) {
+          discount = suiteRoom - suiteRoom * 0.2;
+          specDiscount.innerHTML = `You will pay € ${discount} with 20% OFF!!`;
+        }
+        return discount;
+      }
+    </script>
+  </body>
+</html>
