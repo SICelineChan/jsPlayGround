@@ -1,5 +1,6 @@
 let greetings = "Welcome to this coding lesson!";
 const splits = greetings.split(" ");
+//opposite of splits will be join
 // console.log(splits[0].length);
 // console.log(splits);
 let newArray = [];

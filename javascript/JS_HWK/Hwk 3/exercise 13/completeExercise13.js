@@ -1,25 +1,17 @@
 let greetings = "Welcome to this coding lesson!";
 const splits = greetings.split(" ");
-// console.log(splits.length);
-// console.log(splits);
-
-let print = [];
-// let output = "";
-// for (let i = 0; i < splits.length; i++) {
-//   let stars = "*";
-//   output += stars;
-// }
-// console.log(output);
-
-printGreetings(splits);
-
-function printGreetings(splits) {
-  let someStars = "*";
-  for (let i = 0; i < splits.length; i++) {
-    print = "*" + splits[i];
-    console.log(print);
-    let moreStars = "*";
-    someStars += moreStars;
+let longWord = 0;
+for (let i = 0; i < splits.length; i++) {
+  if (splits[i].length > longWord) {
+    longWord = splits[i].length;
+    // console.log(longWord);
   }
-  console.log(someStars);
 }
+console.log("*".repeat(longWord + 4));
+for (let i = 0; i < splits.length; i++) {
+  const currentword = splits[i].length;
+  const printPad = " ".repeat(longWord - currentword);
+
+  console.log("* " + splits[i] + printPad + " *");
+}
+console.log("*".repeat(longWord + 4));
