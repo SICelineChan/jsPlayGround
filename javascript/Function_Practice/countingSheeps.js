@@ -14,8 +14,7 @@ function countSheeps(arrayOfSheep) {
   }
   countSheeps(arrayOfSheep);
 
-  let alsoSheep =  arrayOfSheep.filter(function(sheep) {
+  let alsoSheep = arrayOfSheep.filter((sheep)=> {
     return sheep === true;
   });
-  
   console.log(`Also shows ${alsoSheep.length}`);
